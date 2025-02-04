@@ -1,7 +1,6 @@
 # Pomodoro-Timer
 PomoTimer is a web application that helps you use the Pomodoro technique to concentrate more efficiently. It allows you to set and track the time you spend on a task, dividing it into periods of work and rest. Additionally, you can add tasks and predict how much time they will take. PomoTimer is built using HTML, CSS, and JavaScript.
 
-![Preview of the website](./rsc/img/pomotimer-preview.png)
 ### Features
 - Countdown timer: The main feature of the webpage is a pomodoro timer that allows users to set a timer for a specific work session, followed by a break session. The timer counts down and provides notifications when the session is over.
 
@@ -22,7 +21,7 @@ PomoTimer is a web application that helps you use the Pomodoro technique to conc
 - Responsive design: The webpage is responsive, meaning it is optimized for viewing on different screen sizes and devices.
 
 ### How to use
-1. To start, navigate to the webpage at https://mauroibarra29.github.io/Pomodoro-Timer/ using a web browser.
+1. To start, navigate to the webpage at using a web browser.
 2. Set the time for work and rest periods according to your preferences.
 3. Add a task to the app and predict how much time you will need to complete it.
 4. Click the "Start" button to start the timer. The timer will begin counting down from the length of the work session.
@@ -44,19 +43,8 @@ This webpage was developed using several technologies, including HTML, CSS, and 
 
 - Events: The webpage relies heavily on JavaScript events, such as click events for buttons and timers for the work and break sessions.
 
-- Match Media API: The developer used the Match Media API to implement a responsive design for the webpage, allowing it to adapt to different screen sizes and devices.
-
-### Credits
-PomoTimer was developed by Mauro Ibarra.
-
-### Follow Me
-If you enjoyed using this pomodoro timer and would like to stay up-to-date with my latest projects, you can follow me on Instagram and LinkedIn:
-
-Instagram:  [![Instagram](https://img.shields.io/badge/Instagram-%40mauritoibarra-red?logo=instagram)](https://www.instagram.com/mauritoibarra/)
-
-LinkedIn:   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Mauro%20Ibarra-blue?logo=linkedin)](https://www.linkedin.com/in/mauro-ibarra-665323203/)
+  
 
 I appreciate your support and feedback, and I hope this pomodoro timer helps you improve your productivity and reach your goals!
 
-### License
-This project is licensed under the MIT License.
+
