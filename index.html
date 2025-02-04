@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Pomodoro Timer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+</head>
+<body id="body">
+    <div class="sidebar">
+        <button class="two-line-button">
+            <div class="button-text">
+                <span class="text-line">Task</span>
+                <span class="text-line">Management</span>
+            </div>
+        </button>
+        <button class="two-line-button">
+            <div class="button-text">
+                <span class="text-line">All </span>
+                <span class="text-line">Pomodoros</span>
+            </div>
+        </button>
+        <button>Charts</button>
+        <button>Premium</button>
+        <button>More</button>
+    </div>
+    <div class="task-management-view">
+        <div class="task-board-header">
+            <div class="task-header-top">
+                <h2>Task Management</h2>
+                <button class="task-board-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="board-actions">
+                <button class="board-view-btn active" data-view="board">Board View</button>
+                <button class="board-view-btn" data-view="list">List View</button>
+            </div>
+        </div>
+        
+        <div class="task-boards">
+            <div class="board">
+                <div class="board-header">
+                    <h3>In Progress</h3>
+                    <span class="task-count">2</span>
+                </div>
+                <div class="board-tasks">
+                    <div class="board-task">
+                        <h4 class="task-title">Project Research</h4>
+                        <div class="task-info">
+                            <div class="time-info">
+                                <i class="fa-regular fa-clock"></i>
+                                <span>2.5h / 4h</span>
+                            </div>
+                            <div class="pomodoro-info">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span>3/8 pomodoros</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- More tasks... -->
+                </div>
+            </div>
+
+            <div class="board">
+                <div class="board-header">
+                    <h3>Completed</h3>
+                    <span class="task-count">1</span>
+                </div>
+                <div class="board-tasks">
+                    <!-- Completed tasks -->
+                </div>
+            </div>
+
+            <div class="board">
+                <div class="board-header">
+                    <h3>On Hold</h3>
+                    <span class="task-count">0</span>
+                </div>
+                <div class="board-tasks">
+                    <!-- On hold tasks -->
+                </div>
+            </div>
+        </div>
+
+        <!-- List View -->
+        <div class="task-list">
+            <!-- List items will be added here dynamically -->
+        </div>
+    </div>
+    <div class="all-pomodoros-view">
+        <div class="pomodoros-content">
+            <div class="pomodoros-header">
+                <h2>All Pomodoros</h2>
+                <div class="pomodoros-header-actions">
+                    <button class="clear-all-btn">Clear All</button>
+                    <i class="fa-solid fa-xmark pomodoros-close"></i>
+                </div>
+            </div>
+            <div class="pomodoros-stats">
+                <div class="stat-item">
+                    <h3>Today's Pomodoros</h3>
+                    <span class="today-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <h3>Total Pomodoros</h3>
+                    <span class="total-count">0</span>
+                </div>
+            </div>
+            <div class="pomodoros-grid">
+                <!-- Pomodoros will be added here dynamically -->
+            </div>
+        </div>
+        </div>
+    <section class="options">
+        <div class="report">
+            
+            <div class="report-container">
+                <div class="report-header">
+                    <h3 class="report-header-title"></h3>
+                    <i class="fa-solid fa-xmark report-header-cruz"></i>
+                </div>
+                <div class="report-summary">
+                    <div class="report-hero-summary">
+                        <h4 class="report-timer-title">Summary</h4>
+                    </div>
+                    <p class="report-info">This report will be available when you enter to the website.</p>
+                    <div class="report-reports">
+                        <div class="report-report">
+                            <div class="report-report-top">
+                                <i class="fa-regular fa-clock"></i>
+                                <p class="hours-focused">- -</p>
+                            </div>
+                            <div class="report-report-bottom">
+                                <p>hours focused</p>
+                            </div>
+                        </div>
+                        <div class="report-report">
+                            <div class="report-report-top">
+                                <i class="fa-regular fa-clock"></i>
+                                <p id="days-accesed">- -</p>
+                            </div>
+                            <div class="report-report-bottom">
+                                <p >days accesed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-bottom">
+                        <button class="report-restart-button" id="restart-report">Restart</button>
+                        <button class="report-button">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="settings">
+            <div class="settings-container">
+                <div class="settings-header">
+                    <h3 class="settings-header-title">Settings</h3>
+                    <i class="fa-solid fa-xmark settings-header-cruz"></i>
+                </div>
+                <div class="settings-timer">
+                    <div class="settings-hero-timer">
+                        <i class="fa-regular fa-clock"></i>
+                        <h4 class="settings-timer-title">Timer</h4>
+                    </div>
+                    <h4 class="settings-timer-title">Time (minutes)</h4>
+                    <div class="settings-timer-inputs">
+                        <div class="settings-timer-input">
+                            <h4>Pomodoro</h4>
+                            <input type="number" value="25" id="pomo-value" max="99">
+                        </div>
+                        <div class="settings-timer-input">
+                            <h4>Short break</h4>
+                            <input type="number" value="5" id="short-value" max="99">
+                        </div>
+                        <div class="settings-timer-input">
+                            <h4>Long break</h4>
+                            <input type="number" value="15" id="long-value" max="99">
+                        </div>
+                    </div>
+                    <div class="settings-timer-long-interval">
+                        <h4>Long break interval</h4>
+                        <input type="number" value="4" id="interval-value">
+                    </div>
+                    <div class="settings-hero-timer">
+                        <i class="fa-regular fa-clock"></i>
+                        <h4 class="settings-timer-title">Audio Clock</h4>
+                    </div>
+                    <div class="settings-timer-audio">
+                        <label for="alarm-audio" class="settings-timer-audio-title">Choose audio</label>
+                        <select name="alarm-audio" id="alarm-audio">
+                            <option value="alarm-beep">Alarm Beep</option>
+                            <option value="alarm-song">Alarm Song</option>
+                            <option value="fire-alarm">Fire Alarm</option>
+                            <option value="spaceship-alarm">SpaceShip Alarm</option>
+                            <option value="cucu-alarm">Cucu Alarm</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="settings-bottom"><button class="settings-ok" id="ok-settings">OK</button></div>
+                
+            </div>
+        </div>
+    </section>
+    <header>
+        <div class="header-logo">
+            <a href="#" class="header-logo-link">
+                <i class="fa-solid fa-circle-check"></i>
+                <h1 class="header-title" id="header-title"></h1>
+            </a>
+
+        </div>
+        <div class="header-sections">
+            <div class="header-report header-item" id="report-button">
+                <a href="#">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <h2 id="header-title-report" class="header-title-report"></h2>
+                </a>
+            </div>
+            <div class="header-settings header-item" id="settings-button">
+                <a href="#">
+                    <i class="fa-solid fa-gear"></i>
+                    <h2 id="header-title-settings" class="header-title-settings"></h2>
+                </a>
+            </div>
+            <div class="header-user-section">
+                <div class="header-login header-item">
+                    <a href="#" id="login-trigger">
+                        <i class="fa-solid fa-user"></i>
+                        <h2 id="header-title-login" class="header-title-login">Login</h2>
+                    </a>
+                </div>
+                <div class="header-logout header-item" style="display: none;">
+                    <a href="#" id="logout-trigger" onclick="logout()">
+                        <i class="fa-solid fa-sign-out-alt"></i>
+                        <h2 class="header-title-logout">Logout</h2>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="timer">
+        <div class="timer-container">
+            <div class="timer-top">
+                <div class="timer-pomo timer-pomo-active"><h2 id="timer-pomo">Pomo</h2></div>
+                <div class="timer-pomo "><h2 id="timer-short">Short</h2></div>
+                <div class="timer-pomo "><h2 id="timer-long">Long</h2></div>
+            </div>
+            <div class="timer-center"><p id="timer-number">25:00</p></div>
+            <div class="timer-bottom">
+                <a href="#" class="timer-button" id="timer-button">
+                    <span class="start">START</span>
+                    <svg width="13px" height="10px" viewBox="0 0 13 10">
+                        <path d="M1,5 L11,5"></path>
+                        <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                </a>
+                <div class="timer-next-button" id="timer-next-button">
+                    <i class="fa-solid fa-forward"></i>
+                </div>
+            </div>
+            
+        </div>
+    
+    </section>
+    <section class="info">
+        <div class="info-container">
+            <p class="info-pomo-count" id="info-pomo-count">#0</p>
+            <p class="info-pomo-advice" id="timer-advice">Time to Focus!</p>
+        </div>
+    </section>
+    
+<section class="task">
+    <div class="task-container" id="task-container">
+        <div class="task-top-container">
+            <h3>Tasks</h3>
+            <div class="task-button">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        </div>
+        <div class="tasks-container" id="tasks-container"></div>
+        <div class="task-add" id="task-add-button">
+            <i class="fa-solid fa-circle-plus"></i>
+            <p>Add Task</p>
+        </div>
+    </div>
+</section>
+
+    <div class="charts-view">
+        <div class="charts-header">
+            <h2>Charts & Analytics</h2>
+            <button class="charts-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="charts-content">
+            <div class="chart-filters">
+                <button class="filter-btn active" data-period="week">Week</button>
+                <button class="filter-btn" data-period="month">Month</button>
+                <button class="filter-btn" data-period="year">Year</button>
+            </div>
+            
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Pomodoros Completed</h3>
+                    <canvas id="pomodorosChart"></canvas>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>Daily Focus Hours</h3>
+                    <canvas id="focusHoursChart"></canvas>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>Task Completion Rate</h3>
+                    <canvas id="taskCompletionChart"></canvas>
+                </div>
+                
+                <div class="chart-card stats-card">
+                    <div class="stat-item">
+                        <h4>Total Pomodoros</h4>
+                        <span class="total-pomodoros">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Focus Hours</h4>
+                        <span class="total-focus-hours">0h</span>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Completion Rate</h4>
+                        <span class="completion-rate">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-container logged-out">
+        <div class="auth-content-wrapper">
+            <button class="auth-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="auth-header">
+                <h2>Welcome Back</h2>
+                <p class="auth-subtitle">Track your productivity journey</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Sign In</button>
+                <button class="auth-tab" data-tab="signup">Create Account</button>
+            </div>
+            
+            <div class="auth-content">
+                <div class="auth-error"></div>
+                <div class="auth-form login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="••••••••">
+                    </div>
+                    <button class="auth-submit" onclick="login(document.getElementById('login-email').value, document.getElementById('login-password').value)">
+                        Sign In
+                    </button>
+                    <div class="auth-divider">
+                        <span>or continue with</span>
+                    </div>
+                    <button class="google-signin" onclick="signInWithGoogle()">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                        Sign in with Google
+                    </button>
+                </div>
+                
+                <div class="auth-form signup-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" placeholder="••••••••">
+                    </div>
+                    <button class="auth-submit" onclick="signUp(document.getElementById('signup-email').value, document.getElementById('signup-password').value)">
+                        Create Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-menu logged-in" style="display: none;">
+        <span class="user-email"></span>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="premium-view">
+        <div class="premium-content-wrapper">
+            <button class="premium-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="premium-header">
+                <h2>Upgrade to Premium</h2>
+                <p class="premium-subtitle">Unlock all premium features</p>
+            </div>
+            
+            <div class="premium-features">
+                <div class="premium-feature">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <div class="feature-text">
+                        <h3>Advanced Analytics</h3>
+                        <p>Detailed insights into your productivity patterns</p>
+                    </div>
+                </div>
+                <div class="premium-feature">
+                    <i class="fa-solid fa-cloud"></i>
+                    <div class="feature-text">
+                        <h3>Cloud Sync</h3>
+                        <p>Sync your data across all devices</p>
+                    </div>
+                </div>
+                <div class="premium-feature">
+                    <i class="fa-solid fa-palette"></i>
+                    <div class="feature-text">
+                        <h3>Custom Themes</h3>
+                        <p>Personalize your timer with custom themes</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="premium-plans">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Monthly</h3>
+                        <div class="plan-price">
+                            <span class="currency">$</span>
+                            <span class="amount">4.99</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <button class="plan-select-btn">Select Plan</button>
+                </div>
+                <div class="plan-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="plan-header">
+                        <h3>Yearly</h3>
+                        <div class="plan-price">
+                            <span class="currency">$</span>
+                            <span class="amount">49.99</span>
+                            <span class="period">/year</span>
+                        </div>
+                        <div class="plan-savings">Save 17%</div>
+                    </div>
+                    <button class="plan-select-btn">Select Plan</button>
+                </div>
+            </div>
+
+            <div class="payment-methods">
+                <h3>Payment Methods</h3>
+                <div class="payment-options">
+                    <button class="payment-option">
+                        <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg" alt="PayPal">
+                        PayPal
+                    </button>
+                    <button class="payment-option">
+                        <i class="fa-solid fa-credit-card"></i>
+                        Credit Card
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="more-info-view">
+        <div class="more-info-content">
+            <div class="more-info-header">
+                <h2>About Pomodoro Technique</h2>
+                <button class="more-info-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="more-info-body">
+                <section class="more-info-section">
+                    <h3>Do more and have fun with time management</h3>
+                    <p>Do you feel overwhelmed by work, tend to procrastinate, struggle with concentration or have problems meeting demanding deadlines? If you answered yes to any of these questions, you need the Pomodoro Technique!</p>
+                    <p>The Pomodoro® Technique is an easy and fun way to get the most out of time management. Turn time into a valuable ally to accomplish tasks while keeping track of your progress.</p>
+                </section>
+
+                <section class="more-info-section technique-visual">
+                    <div class="technique-image-container">
+                        <img src="./images/image.png" alt="Pomodoro Timer" class="technique-image">
+                        <div class="image-caption">
+                            The classic Pomodoro® timer - a simple yet powerful tool for time management
+                        </div>
+                    </div>
+                </section>
+
+                <section class="more-info-section">
+                    <h3>What is the Pomodoro® Technique?</h3>
+                    <div class="technique-explanation">
+                        <div class="technique-icon">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <p>The Pomodoro® Technique is a time management method developed by Francesco Cirillo in the late 1980s. It is a structured method made up of processes, tools, principles and values to learn how to deal with time and turn it from a vicious predator to an ally to boost productivity.</p>
+                    </div>
+                    <p>It is based on a series of principles built on self-observation and awareness. Developing these skills makes it possible to change the relationship with time and reach our goals with less effort and anxiety.</p>
+                </section>
+
+                <section class="more-info-section technique-evaluation">
+                    <h3>Is this Technique for you?</h3>
+                    
+                    <div class="common-scenarios">
+                        <p class="scenario-intro">Has anything like this ever happened to you?</p>
+                        
+                        <ul class="scenarios-list">
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                <p>You are working on a task and you suddenly need to do other things - updating your Facebook status, working on a task of a different project, loading the dishwasher - instead of focusing on your current goal.</p>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                <p>You are working on a task and you hear a voice in your head: "Are you sure this is the right thing to do now? Are you sure you are not forgetting something urgent to do? Are you sure there isn't a better way to do that?</p>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                <p>Your deadline is approaching and completing your task on time seems impossible: the more time you work on it and the more complex it seems.</p>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                <p>You're constantly interrupted by other members of the team: your attention span gets smaller and smaller and you make more mistakes.</p>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                <p>You need to reach multiple goals by the end of the week and you don't know what the best task to start with is.</p>
+                            </li>
+                        </ul>
+
+                        <div class="reassurance-message">
+                            <p>You are not alone! We all face the same problem. We know we should focus on the task in hand, but it feels impossible with so many distractions and demands on our time.</p>
+                            <p>These kinds of occurrences are common when it comes to reaching goals under the pressure of time. The Pomodoro® Technique is a training programme to learn how to deal with these occurrences in a productive way in order to reach our own objectives.</p>
+                            <p class="emphasis">We all need The Pomodoro® Technique. This deceptively simple tool transforms both work and home life and make us far more productive.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="more-info-section technique-working">
+                    <h3>How does the Technique work?</h3>
+                    <div class="working-explanation">
+                        <p>Time is limited. We can't have as much as we want, neither stop it nor slow it down. When our mind realizes that it cannot control time, we get scared and time appears to us as a vicious predator.</p>
+                        <p>The answers our frightened mind finds are dysfunctional: "run faster", "work harder", "find a shortcut" "do something else". None of these options are effective. And, as you may have experienced, these answers generate more frustration, weariness and a sense of guilt. Procrastination and low productivity are the effect of the anxiety we feel when we don't know how to deal with the fact that we can't control time.</p>
+                        <p>The Pomodoro® Technique helps our brain recognise and observe those tricky moments and learn how to deal with them efficiently, which is so crucial in order to find functional answers and in the end to reach our goals.</p>
+                    </div>
+                </section>
+
+                <section class="more-info-section">
+                    <div class="info-highlight">
+                        <p>For many of us time is an enemy. The anxiety triggered by deadlines leads to ineffective work and procrastination. The Pomodoro® Technique transforms time into a valuable ally. Thanks to this technique we can use time to be more productive.</p>
+                    </div>
+                </section>
+
+                <section class="more-info-section benefits-section">
+                    <h3>Benefits of the Pomodoro® Technique</h3>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Enhanced Focus and Concentration</h4>
+                            <p>The Pomodoro® Technique utilizes fixed time intervals for focused work, usually 25 minutes, followed by short breaks. This structured approach keeps the mind alert and engaged, significantly reducing the inclination to procrastinate and enabling a deeper focus on tasks.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Improved Time Management</h4>
+                            <p>By segmenting work into distinct Pomodoros, the technique encourages a more conscious approach to time allocation. It allows for more precise tracking of how time is spent on various tasks, fostering better planning and efficiency in both daily tasks and longer-term projects.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Reduced Work-Related Stress</h4>
+                            <p>Regular breaks, integral to the Pomodoro Technique, help in preventing mental fatigue and lowering stress levels. This structure ensures that work periods are intense and productive, while breaks offer necessary moments of relaxation, promoting a healthier balance between work and rest.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Enhanced Team Communication and Flexibility</h4>
+                            <p>While each team member works on their own Pomodoro schedule, the technique encourages more structured and effective communication. By defining specific intervals for collaboration and individual work, it reduces interruptions and enables team members to plan their interaction times more effectively, including swapping pairs for different tasks or perspectives.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-arrows-to-circle"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Adaptability to Varied Task Requirements</h4>
+                            <p>The Pomodoro® Technique is adaptable to different types of tasks and work styles. While the traditional Pomodoro is set at 25 minutes, the technique's real power lies in its ability to be tailored to the nature of the task, whether it requires intense concentration or more creative, free-form thinking. This adaptability makes it a versatile tool for a wide range of activities and projects.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="charts-container">
+        <div class="chart-container" id="daily-chart">
+            <!-- Daily progress chart will be rendered here -->
+        </div>
+        <div class="chart-container" id="weekly-chart">
+            <!-- Weekly progress chart will be rendered here -->
+        </div>
+        <div class="chart-container" id="monthly-chart">
+            <!-- Monthly progress chart will be rendered here -->
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script src="app.js" defer></script>
+    <script src="charts.js" defer></script>
+</body>
+</html>
